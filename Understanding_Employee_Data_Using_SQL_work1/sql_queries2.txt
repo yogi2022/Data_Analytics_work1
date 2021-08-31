@@ -1,0 +1,228 @@
+1) which of the following SELECT statements prints the string 56 ? (Choose all that apply)
+
+a)SELECT SUBSTR('123456',5) FROM DUAL;
+b)SELECT SUBSTR('123456',-2) FROM DUAL;
+c)SELECT SUBSTR('123456',5,2) FROM DUAL;
+d)SELECT SUBSTR('123456',2,2) FROM DUAL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ans-a, b, c
+
+2)
+ There are multiple records in a table, and some of these records are duplicates.
+you need to fetch only one copy of each set of duplicate 
+
+a)SELECT DISTINCT
+b)SELECT UNIQUE
+c)SELECT DIFFERENT
+d)All of these
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ans-a
+
+3)
+The statement in SQL which allows to change the definition of a table is
+A)      Alter
+B)      Update
+C)      Create
+D)      Select
+
+
+
+
+
+
+Answer:  A
+
+
+4)
+Which of the following statements are TRUE about an SQL query?
+P : An SQL query can contain a HAVING clause even if it does not have a GROUP BY clause
+Q : An SQL query can contain a HAVING clause only if it has a GROUP BY clause
+R : All attributes used in the GROUP BY clause must appear in the SELECT clause
+S : Not all attributes used in the GROUP BY clause need to appear in the SELECT clause
+
+(A) P and R
+(B) P and S
+(C) Q and R
+(D) Q and S
+
+
+
+
+
+
+
+Answer: (B)
+
+
+5)
+
+Table A
+Id   Name    Age
+----------------
+12   Arun    60
+15   Shreya  24
+99   Rohit   11
+
+Table B
+Id   Name   Age
+----------------
+15   Shreya  24
+25   Hari    40
+98   Rohit   20
+99   Rohit   11
+
+Table C
+Id   Phone  Area
+-----------------
+10   2200   02  
+99   2100   01
+
+Consider the above tables A, B and C. How many tuples does the result of the following SQL query contains?
+
+SELECT A.id 
+FROM   A 
+WHERE  A.age > ALL (SELECT B.age 
+                    FROM   B 
+                    WHERE  B. name = "arun") 
+
+(A) 4
+(B) 3
+(C) 0
+(D) 1
+
+
+SELECT emp.empno, emp.deptno
+FROM   emp
+WHERE  emp.deptno > ALL (SELECT dept.deptno
+                    FROM  dept 
+                    WHERE  dept.deptno= 60) ;
+
+
+
+
+
+
+Answer: (B)
+
+Explanation: 
+The meaning of “ALL” is the A.Age should be greater than all the values returned by the subquery. 
+There is no entry with name “arun” in table B. So the subquery will return NULL. 
+If a subquery returns NULL, then the condition becomes true for all rows of A. 
+So all rows of table A are selected.
+
+
+6) which one is correct to display all the details of employee whose names are starting with A and 
+all characters upto starting with K
+
+a) SELECT * FROM emp WHERE ename REGEXP '[AK]';
+b) SELECT * FROM emp WHERE ename rlike '[AK]';
+c) SELECT * FROM emp WHERE ename REGEXP '^[A-K]';
+d) SELECT * FROM emp WHERE ename REGEXP '[A-K]';
+
+
+
+
+Ans: C
+
+7)
+
+which key constraint for a  table enforces the table to accept Unique data for a specific column and creates a unique indexs for accessing the table faster
+a) primary key
+b) foreign key
+c) check
+d) default
+
+Ans: A
+
+
+8) 
+Create table student(Sno integer NOT NULL,
+			Sname varchar(10), Marks integer);
+
+which are the following sql queries not valid?(choose all that apply)
+
+
+a) insert into student values(101,'Arun',50);
+b) insert into student values(NULL,'Arun',NULL); 
+c) insert into student values(NULL,NULL,NULL); 
+d) insert into student values(102,'NULL',60); 
+e) insert into student values(102,'RAM',NULL); 
+
+
+
+
+Ans: B and C
+
+9) which one will create a new table called "new_table" that included all columns from the old_table, 
+but no data from the old_table table.
+
+a) create table new_table as (select * from old_table);
+b) create table new_table as (select * from old_table where 1=1);
+c) create table new_table as (select * from old_table where 1=2);
+d) create table new_table as (select 1=1 from old_table);
+
+
+
+
+
+
+ans =c
+
+10) which table updates the schema of the table?
+a) update
+b) where
+c) modify
+d) alter
+
+
+
+Ans: d
+
+
+
+

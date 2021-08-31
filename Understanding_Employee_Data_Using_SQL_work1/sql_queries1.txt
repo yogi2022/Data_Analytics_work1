@@ -1,0 +1,125 @@
+
+
+1) display the names of employees in descending order whose sal is more than 'BLAKE'
+-- Table names EMP, DEPT
+
+
+use test;
+select ENAME, sal
+from emp
+where SAL >(select SAL from emp where ENAME like 'BLAKE')
+order by ENAME desc;
+
+
+
+
+
+2) display names of departments in descending order,  which doesn't have employees 
+-- Table names EMP, DEPT
+
+use test;
+SELECT DNAME, deptno
+FROM dept
+WHERE DEPTNO IN (SELECT distinct(DEPTNO) FROM emp);
+
+
+
+
+
+
+3) display top two jobs by employee count
+   Note: Display the output descending order of employee count
+   Note2: columns should be displayed as Job_Name, Number_of_employees
+
+
+     select job Job_Name, count(*) Number_of_employees 
+     from emp 
+     group by job 
+     order by Number_of_employees desc
+     limit 2;
+
+
+  
+
+
+
+
+
+4) display the salaries of employess in ascending order and ename's where employee names starting with K and ending with N
+output columns names should be:  Salary, "Employee_Name"
+
+use test;
+select sal Salary, ename Employee_Name from emp 
+where ename like 'K%N'
+order by sal ;
+
+
+
+
+5) display all the enames along with employee number who don't have manager?
+   output columns should be "Employee_Name","Employee_Number"
+
+use test;
+select ename Employee_Name,empno Employee_Number
+from emp
+where mgr is null;
+
+
+6) display all the enames in ascending order whose hiring year is 1998?
+
+use test;
+select ename, hiredate
+from emp 
+where hiredate like '%1998%'
+order by ename;
+
+
+
+
+7) display names of employees in descending order, whose Comm Is more than their Sal.
+   
+   use test;
+   select empno, ename, sal, comm 
+   from emp 
+   where comm > sal 
+   order by ename desc;
+   
+   
+
+
+
+
+
+8) Display the names of the employees is ascending order who belongs to RESEARCH department
+
+use test;
+  select ename
+  from  emp 
+  where deptno = 
+  (select deptno from dept where dname = "Research")
+  order by ename;
+
+
+
+
+
+
+9) Display employee names who are  all the Clerks of Deptno 20.
+   note: employee names in ascending order.
+
+    select empno, ename, job, deptno
+    from emp 
+    where job ="CLERK" and deptno = 20
+    order by ename;
+    
+    
+
+
+
+10) Find the no of employees who are working in department number 10
+output display "Number_of_Employees" as output column
+
+select count(*) Number_of_Employees
+from emp
+where deptno=10; 
+

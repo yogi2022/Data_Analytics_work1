@@ -1,0 +1,93 @@
+1) Display the ename's Whose Annual sal ranging from 22,000 and 45,000.
+(note: ename should be in ascending order)
+
+     select ename, 12*sal
+     from emp 
+     where 12*sal between 22000 and 45000
+     order by ename asc;
+
+     
+ 2) List the department numbers where at least three emps are working
+     (note: display deptno , count of employees)
+
+    select deptno  
+    from emp 
+    group by deptno having count(*) >= 3;
+
+
+				
+3) Display the 3rd highest sal from emp table
+   Note: column name should be Third_Highest_Sal
+
+		select distinct sal "Third_Highest_Sal"
+	     	from emp 
+	     	order by sal desc 
+	     	limit 2,1;
+
+ Select sal as Third_Highest_Sal from emp order by sal desc limit 1 offset 3;
+
+4)  Find out Smith work experience(in terms of number of days) in this company
+    Hint: use hiredate to find out experience.
+    Note: Print column name as SMITH_Work_Experience
+
+   select  DATEDIFF(CURDATE(),hiredate) SMITH_Work_Experience
+   from emp
+   where ename='SMITH';
+
+   select datediff(sysdate(),(select hiredate from emp where ename="smith")) as "SMITH_Work_Experience";
+   
+5) find the names of employees who are having more than 25years of experience
+   Note display names in ascending order or Experience
+   
+   select ename
+   from emp 
+   where timestampdiff(year,hiredate,sysdate())>25
+   order by timestampdiff(year,hiredate,sysdate());
+
+6)   Display the highest paid employee name who is working under KEVIN.
+
+     select ename 
+     from emp 
+     where sal in (select max(sal) 
+                   from emp 
+		   where mgr in (select empno 
+		                 from emp 
+				 where ename = 'KEVIN')
+				);
+
+ 
+ 7)  display the employee names their own manager names.
+     Note: column names should be Employee_Name and Manager_Name
+
+select  e1.ename "Employee_Name", e2.ename "Manager_Name"
+from emp e1 join emp e2 
+on e1.mgr = e2.empno 
+order by e1.ename;
+ 
+ 
+8) display the employee names who are senior to their own manager.
+ 
+select  e1.ename 
+from emp e1 join emp e2 
+on e1.mgr = e2.empno 
+and e1.hiredate < e2.hiredate
+order by e1.ename;
+
+
+9)
+write an sql query to display the Empno, Ename, Sal, Dname whose job is either  'MANAGERS' or 'ANALYST' and 
+working in 'New York' or 'Dallas'  without receiving the Comm
+
+  Note: display the names in ascending order of Location. 
+        Column names should be Employee_Number, Employee_Name, Employee_Sal, Department_name
+
+select e.empno Employee_Number,e.ename Employee_Name,e.sal Employee_Sal,d.dname Department_name
+from emp e ,dept d 
+where d.location in ('New York','Dallas') 
+and e.deptno = d.deptno 
+and e.empno in (select e.empno 
+                from emp e 
+                where e.job in ('MANAGER','ANALYST') 
+                and e.comm is null) 
+order by d.location asc;
+
